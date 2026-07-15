@@ -1,0 +1,10 @@
+name = "cf-pages-proxy"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "public"
+
+# 注意：以下 [vars] 主要用于本地开发（wrangler pages dev）或作为参考。
+# 生产环境请到 Cloudflare Dashboard：
+# Pages 项目 -> Settings -> Environment variables 中设置 API 变量，
+# 这样才会在线上生效。
+[vars]
+API = "https://api.openai.com/v1/chat/completions"
