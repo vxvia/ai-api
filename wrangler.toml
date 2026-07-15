@@ -1,4 +1,4 @@
-name = "cf-pages-proxy"
+name = "ai-api"
 compatibility_date = "2024-09-01"
 pages_build_output_dir = "public"
 
@@ -7,4 +7,4 @@ pages_build_output_dir = "public"
 # Pages 项目 -> Settings -> Environment variables 中设置 API 变量，
 # 这样才会在线上生效。
 [vars]
-API = "https://api.openai.com/v1/chat/completions"
+API = "https://api.groq.com/openai/v1/chat/completions"
