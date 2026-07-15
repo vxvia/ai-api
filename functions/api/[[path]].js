@@ -1,3 +1,4 @@
+// functions/api/[[path]].js
 export async function onRequest(context) {
   const { request, env } = context;
 
@@ -12,17 +13,20 @@ export async function onRequest(context) {
     });
   }
 
-  // 从环境变量读取 API 地址，没配置就用默认值兜底
   const targetUrl = env.API || 'https://api.openai.com/v1/chat/completions';
+
+  // 读取原始 body（无论什么方法，如果 body 为空会得到空字符串）
+  const body = await request.text();
 
   const forwardHeaders = new Headers(request.headers);
   const targetHost = new URL(targetUrl).host;
   forwardHeaders.set('host', targetHost);
 
+  // 统一使用 POST 方法，避免 405
   const resp = await fetch(targetUrl, {
-    method: request.method,
+    method: 'POST',
     headers: forwardHeaders,
-    body: request.method !== 'GET' ? await request.text() : undefined,
+    body: body || undefined,  // 空字符串时保持 body 为 undefined 或传空
   });
 
   const newResp = new Response(resp.body, resp);
